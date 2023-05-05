@@ -7,6 +7,9 @@
 # testing
 /frontend/coverage
 
+#readmeFile
+readmeFIles.txt
+
 # production
 /frontend/build
 

@@ -4,47 +4,56 @@ const User = require("../models/userModel");
 const sendToken = require("../utils/jwtToken");
 
 //Register User
-exports.registerUser = catchAsyncErrors(async(req,res,next)=>{
+exports.registerUser = catchAsyncErrors(async (req, res, next) => {
+  const { name, email, password } = req.body;
 
-    const {name,email,password} = req.body;
+  const user = await User.create({
+    name,
+    email,
+    password,
+    avatar: {
+      public_id: "this is a sample id",
+      url: "this is a sample url",
+    },
+  });
 
-    const user = await User.create({
-        name,
-        email,
-        password,
-        avatar:{
-            public_id:"this is a sample id",
-            url:"this is a sample url"
-        }
-    });
-
-    sendToken(user,201,res);
-})
-
+  sendToken(user, 201, res);
+});
 
 //Login User
-exports.loginUser = catchAsyncErrors(async (req,res,next)=>{
+exports.loginUser = catchAsyncErrors(async (req, res, next) => {
+  const { email, password } = req.body;
 
+  //Checking if user have given email & password both
+  if (!email || !password) {
+    return next(new ErrorHandler("Please Enter Email & Password", 400));
+  }
 
-    const {email,password} = req.body;
+  //In userSchema we specified select password False By Default
+  const user = await User.findOne({ email }).select("+password");
 
-    //Checking if user have given email & password both
-    if(!email || !password){
-        return next(new ErrorHandler("Please Enter Email & Password",400));
-    }
+  if (!user) {
+    return next(new ErrorHandler("Invalid email or password", 401));
+  }
 
-    //In userSchema we specified select password False By Default
-    const user = await User.findOne({email}).select("+password"); 
+  const isPasswordMatched = await user.comparePassword(password);
 
-    if(!user){
-        return next(new ErrorHandler("Invalid email or password",401));
-    }
+  if (!isPasswordMatched) {
+    return next(new ErrorHandler("Invalid email or password", 401));
+  }
 
-    const isPasswordMatched = await user.comparePassword(password);
+  sendToken(user, 200, res);
+});
 
-    if(!isPasswordMatched){
-        return next(new ErrorHandler("Invalid email or password",401));
-    }
+//Logout User
+exports.logout = catchAsyncErrors(async (req, res, next) => {
+  res.cookie("token", null, {
+    expires: new Date(Date.now()),
+    httpOnly: true,
+  });
 
-    sendToken(user,200,res);
-})
+  res.status(200).json({
+    success: true,
+    message: "Logged Out",
+  });
+});
