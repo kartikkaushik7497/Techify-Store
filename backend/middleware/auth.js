@@ -13,7 +13,21 @@ exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
   const decodedData = jwt.verify(token, process.env.JWT_SECRET);
 
   //getJWTToken made an ._id for a token so here we verify that
-  req.user = await User.findById(decodedData.id); 
+  req.user = await User.findById(decodedData.id);
 
   next();
 });
+
+exports.authorizeRoles = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new ErrorHandler(
+          `Role: ${req.user.role} is not allowed to access this resource`,
+          403
+        )
+      );
+    }
+    next();
+  };
+};
