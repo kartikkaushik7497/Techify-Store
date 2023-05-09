@@ -41,12 +41,17 @@ const productSchema = new mongoose.Schema({
     maxLength: [4, "Stock cannot exceed 4 characters"],
     default: 1,
   },
-  numberOfReviews: {
+  numOfReviews: {
     type: Number,
     default: 0,
   },
   reviews: [
     {
+      user:{
+        type: mongoose.Schema.ObjectId,
+        ref: "User", 
+        required: true 
+      },
       name: {
         type: String,
         required: true,
@@ -60,12 +65,6 @@ const productSchema = new mongoose.Schema({
       },
     },
   ],
-
-  user:{
-    type: mongoose.Schema.ObjectId,
-    ref: "User", 
-    required: true 
-  },
 
   createdAt: {
     type: Date,
