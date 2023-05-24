@@ -1,10 +1,10 @@
 import React from "react";
 import { ReactNavbar } from "overlay-navbar";
-import logo from "../../images/logo.png";
+import logo from "../../../images/logo.png";
 
 import {MdAccountCircle} from "react-icons/md";
 import {MdSearch} from "react-icons/md";
-import {MdAddShoppingCart} from "react-icons/md";
+import {FaShoppingCart} from "react-icons/fa";
 
 const options = {
   burgerColorHover: "#eb4034",
@@ -12,11 +12,18 @@ const options = {
   logoWidth: "20vmax",
   navColor1: "white",
   logoHoverSize: "10px",
-  logoHoverColor: "#eb4034",
+  logoHoverColor: "#FF4621",
   link1Text: "Home",
   link2Text: "Products",
   link3Text: "Contact",
   link4Text: "About", 
+  link1AnimationTime: "0.4", 
+  link2AnimationTime: "0.4", 
+  link3AnimationTime: "0.4", 
+  link4AnimationTime: "0.4", 
+  searchIconAnimationTime: "0.4", 
+  cartIconAnimationTime: "0.4", 
+  profileIconAnimationTime: "0.4", 
   link1Url: "/",
   link2Url: "/products",
   link3Url: "/contact",
@@ -38,7 +45,7 @@ const options = {
   SearchIconElement:MdSearch,
   cartIcon:true,
   cartIconColor: "rgba(35, 35, 35,0.8)",
-  CartIconElement:MdAddShoppingCart,
+  CartIconElement:FaShoppingCart,
   profileIconColorHover: "#eb4034",
   searchIconColorHover: "#eb4034",
   cartIconColorHover: "#eb4034",
