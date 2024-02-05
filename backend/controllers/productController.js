@@ -21,12 +21,12 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 });
 
 //Get All Products --Admin
-exports.getAllProducts = catchAsyncErrors(async (req, res) => {
+exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
   // const products = await Product.find();
 
   //Taking .query from  **this.query = this.query.find({ ...keyword });**
   //And Search
-  const resultPerPage = 5;
+  const resultPerPage = 8;
   const productCount = await Product.countDocuments();
 
   const apiFeatures = new ApiFeatures(Product.find(), req.query)
@@ -38,6 +38,8 @@ exports.getAllProducts = catchAsyncErrors(async (req, res) => {
   res.status(200).json({
     success: true,
     products,
+    productCount,
+    resultPerPage,
   });
 });
 
@@ -52,7 +54,6 @@ exports.getProductDetails = catchAsyncErrors(async (req, res, next) => {
   res.status(200).json({
     success: true,
     product,
-    productCount,
   });
 });
 
@@ -157,7 +158,7 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
 
   const reviews = product.reviews.filter(
     (rev) => rev._id.toString() !== req.query.id.toString()
-  );//DIdn't understand this code
+  ); //DIdn't understand this code
 
   let avg = 0;
 
@@ -169,15 +170,19 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
 
   const numOfReviews = reviews.length;
 
-  await Product.findByIdAndUpdate(req.query.productId,{
-    reviews,
-        ratings,
-        numOfReviews,
-  },{
-    new:true,
-    runValidators:true,
-    useFindAndModify:false,
-  });
+  await Product.findByIdAndUpdate(
+    req.query.productId,
+    {
+      reviews,
+      ratings,
+      numOfReviews,
+    },
+    {
+      new: true,
+      runValidators: true,
+      useFindAndModify: false,
+    }
+  );
 
   res.status(200).json({
     success: true,
