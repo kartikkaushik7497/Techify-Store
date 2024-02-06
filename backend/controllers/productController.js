@@ -31,15 +31,22 @@ exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
 
   const apiFeatures = new ApiFeatures(Product.find(), req.query)
     .search()
-    .filter()
-    .pagination(resultPerPage);
-  const products = await apiFeatures.query; //Inside products are all searched results
+    .filter();
+
+  let products = await apiFeatures.query;
+
+  let filteredProductsCount = products.length;
+
+  apiFeatures.pagination(resultPerPage);
+
+  products = await apiFeatures.query.clone(); //Inside products are all searched results
 
   res.status(200).json({
     success: true,
     products,
     productCount,
     resultPerPage,
+    filteredProductsCount,
   });
 });
 

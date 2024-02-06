@@ -1,11 +1,11 @@
 import React, { useState, Fragment } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Metadata from "../layout/Metadata";
 import "./Search.css";
 
 const Search = ({ history }) => {
   const [keyword, setKeyword] = useState("");
   const navigate = useNavigate();
-  
 
   const searchSubmitHandler = (e) => {
     e.preventDefault();
@@ -18,6 +18,7 @@ const Search = ({ history }) => {
 
   return (
     <Fragment>
+      <Metadata title="SEARCH A PRODUCT" />
       <form className="searchBox" onSubmit={searchSubmitHandler}>
         <input
           type="text"
