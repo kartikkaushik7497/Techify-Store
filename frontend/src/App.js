@@ -10,6 +10,7 @@ import Home from "./component/Home/Home.jsx";
 import ProductDetails from "./component/Product/ProductDetails.jsx";
 import Products from "./component/Product/Products.jsx";
 import Search from "./component/Product/Search.jsx";
+import LoginSignUp from "./component/User/LoginSignUp.jsx";
 
 function App() {
   React.useEffect(() => {
@@ -25,11 +26,12 @@ function App() {
       <Header />
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route exact path="/product/:id" element={<ProductDetails />} />
+        <Route exact path="/products/:id" element={<ProductDetails />} />
         <Route exact path="/products" element={<Products />} />
         <Route path="/products/:keyword" element={<Products />} />
 
         <Route exact path="/search" element={<Search />} />
+        <Route exact path="/login" element={<LoginSignUp />} />
       </Routes>
       <Footer />
     </Router>

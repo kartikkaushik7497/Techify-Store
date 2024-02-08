@@ -28,6 +28,7 @@ export const productsReducer = (state = { products: [] }, action) => {
         loading: false,
         error: action.payload,
       };
+      //...state meand access everything present in the state object
     case CLEAR_ERRORS:
       return {
         ...state,
