@@ -11,6 +11,8 @@ import ProductDetails from "./component/Product/ProductDetails.jsx";
 import Products from "./component/Product/Products.jsx";
 import Search from "./component/Product/Search.jsx";
 import LoginSignUp from "./component/User/LoginSignUp.jsx";
+import store from "./store.js";
+import { loadUser } from "./actions/userAction.js";
 
 function App() {
   React.useEffect(() => {
@@ -19,6 +21,7 @@ function App() {
         families: ["Roboto", "Droid Sans", "Chilanka"],
       },
     });
+    store.dispatch(loadUser());
   }, []);
 
   return (
