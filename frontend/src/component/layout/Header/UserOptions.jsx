@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from "react";
 import "./Header.css";
 import { SpeedDial, SpeedDialAction } from "@material-ui/lab";
+import Backdrop from "@material-ui/core/Backdrop";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
@@ -8,6 +9,7 @@ import ListAltIcon from "@material-ui/icons/ListAlt";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useAlert } from "react-alert";
+import { logout } from "../../../actions/userAction";
 
 const UserOptions = ({ user }) => {
   const dispatch = useDispatch();
@@ -37,14 +39,17 @@ const UserOptions = ({ user }) => {
     navigate("/account");
   }
   function logoutUser() {
-    // dispatch(logout());
+    dispatch(logout());
     alert.success("Logout Sucessfully");
   }
 
   const [open, setOpen] = useState(false);
   return (
     <Fragment>
+      <Backdrop open={open} style={{ zIndex: "10" }} />
       <SpeedDial
+        className="speedDial"
+        style={{ zIndex: "11" }}
         ariaLabel="SpeedDial tooltip example"
         onClose={() => setOpen(false)}
         onOpen={() => setOpen(true)}
@@ -60,6 +65,7 @@ const UserOptions = ({ user }) => {
       >
         {options.map((item) => (
           <SpeedDialAction
+            key={item.name}
             icon={item.icon}
             tooltipTitle={item.name}
             onClick={item.func}
