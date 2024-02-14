@@ -37,6 +37,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "user",
   },
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+  },
   resetPasswordToken: String,
   resetPasswordExpire: Date,
 });
@@ -72,11 +76,11 @@ userSchema.methods.getResetPasswordToken = function () {
     .update(resetToken)
     .digest("hex");
 
-    //resetPasswordExpire i.e the time till you want your
-    //resetPasswordToken to be valid after that it will expire
-    this.resetPasswordExpire = Date.now() + 15 * 60 * 1000;
+  //resetPasswordExpire i.e the time till you want your
+  //resetPasswordToken to be valid after that it will expire
+  this.resetPasswordExpire = Date.now() + 15 * 60 * 1000;
 
-    return resetToken;
+  return resetToken;
 };
 
 module.exports = mongoose.model("User", userSchema);
