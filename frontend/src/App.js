@@ -44,16 +44,21 @@ function App() {
         <Route path="/products/:keyword" element={<Products />} />
 
         <Route exact path="/search" element={<Search />} />
+
+        <Route exact path="/login" element={<LoginSignUp />} />
+
         <Route
           exact
           path="/account"
           element={<ProtectedRoute component={Profile} />}
         />
+
         <Route
           exact
           path="/me/update"
           element={<ProtectedRoute component={UpdateProfile} />}
         />
+
         <Route
           exact
           path="/password/update"
@@ -61,9 +66,7 @@ function App() {
         />
 
         <Route exact path="/password/forgot" element={<ForgotPassword />} />
-
-        <Route exact path="/login" element={<LoginSignUp />} />
-
+        
       </Routes>
       <Footer />
     </Router>
