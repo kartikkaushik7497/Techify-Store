@@ -3,22 +3,23 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import WebFont from "webfontloader";
 import React from "react";
 
-import Header from "./component/layout/Header/Header.jsx";
-import Footer from "./component/layout/Footer/Footer.jsx";
-// import Loader from "./component/layout/Loader/Loader.jsx";
-import Home from "./component/Home/Home.jsx";
-import ProductDetails from "./component/Product/ProductDetails.jsx";
-import Products from "./component/Product/Products.jsx";
-import Search from "./component/Product/Search.jsx";
-import LoginSignUp from "./component/User/LoginSignUp.jsx";
+import Header from "./component/layout/Header/Header";
+import Footer from "./component/layout/Footer/Footer";
+// import Loader from "./component/layout/Loader/Loader";
+import Home from "./component/Home/Home";
+import ProductDetails from "./component/Product/ProductDetails";
+import Products from "./component/Product/Products";
+import Search from "./component/Product/Search";
+import LoginSignUp from "./component/User/LoginSignUp";
 import store from "./store.js";
 import { loadUser } from "./actions/userAction.js";
 import UserOptions from "./component/layout/Header/UserOptions";
 import { useSelector } from "react-redux";
 import Profile from "./component/User/Profile";
-import ProtectedRoute from "./component/Route/ProtectedRoute.jsx";
-import UpdateProfile from "./component/User/UpdateProfile.jsx";
-import UpdatePassword from "./component/User/UpdatePassword.jsx";
+import ProtectedRoute from "./component/Route/ProtectedRoute";
+import UpdateProfile from "./component/User/UpdateProfile";
+import UpdatePassword from "./component/User/UpdatePassword";
+import ForgotPassword from "./component/User/ForgotPassword";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -58,7 +59,11 @@ function App() {
           path="/password/update"
           element={<ProtectedRoute component={UpdatePassword} />}
         />
+
+        <Route exact path="/password/forgot" element={<ForgotPassword />} />
+
         <Route exact path="/login" element={<LoginSignUp />} />
+
       </Routes>
       <Footer />
     </Router>
