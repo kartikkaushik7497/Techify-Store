@@ -84,6 +84,17 @@
     font-size: 1.6vmax;
     color: rgba(0, 0, 0, 0.623);
   }
+  .loginForm > div > #eye,
+  .signUpForm > div > #eye {
+    position: absolute;
+    transform: translateX(19vmax);
+    font-size: 1.4vmax;
+    color: rgba(0, 0, 0, 0.623);
+    -webkit-transform: translateX(19vmax);
+    -moz-transform: translateX(19vmax);
+    -ms-transform: translateX(19vmax);
+    -o-transform: translateX(19vmax);
+}
   
   .loginForm > a {
     color: rgba(0, 0, 0, 0.651);

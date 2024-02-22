@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, register, clearErrors } from "../../actions/userAction";
 import { useAlert } from "react-alert";
 import { useNavigate } from "react-router-dom";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
 const LoginSignUp = () => {
   const dispatch = useDispatch();
@@ -24,6 +26,8 @@ const LoginSignUp = () => {
 
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [isPasswordTyped, setIsPasswordTyped] = useState(false);
 
   const [user, setUser] = useState({
     name: "",
@@ -33,6 +37,10 @@ const LoginSignUp = () => {
   const { name, email, password } = user;
   const [avatar, setAvatar] = useState("/Profile.png");
   const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   const loginSubmit = (e) => {
     e.preventDefault();
@@ -125,12 +133,24 @@ const LoginSignUp = () => {
                 <div className="loginPassword">
                   <LockOpenIcon />
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     placeholder="Password"
                     required
                     value={loginPassword}
-                    onChange={(e) => setLoginPassword(e.target.value)}
+                    onChange={(e) => {
+                      setLoginPassword(e.target.value);
+                      setIsPasswordTyped(e.target.value !== "");
+                    }}
                   />
+                  {isPasswordTyped &&
+                    (showPassword ? (
+                      <VisibilityOffIcon
+                        id="eye"
+                        onClick={toggleShowPassword}
+                      />
+                    ) : (
+                      <VisibilityIcon id="eye" onClick={toggleShowPassword} />
+                    ))}
                 </div>
                 <Link to="/password/forgot">Forget Password ?</Link>
                 <input type="submit" value="Login" className="loginBtn" />
@@ -166,13 +186,18 @@ const LoginSignUp = () => {
                 <div className="signUpPassword">
                   <LockOpenIcon />
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     placeholder="Password"
                     required
                     name="password"
                     value={password}
                     onChange={registerDataChange}
                   />
+                  {showPassword ? (
+                    <VisibilityOffIcon id="eye" onClick={toggleShowPassword} />
+                  ) : (
+                    <VisibilityIcon id="eye" onClick={toggleShowPassword} />
+                  )}
                 </div>
 
                 <div id="registerImage">
