@@ -9,6 +9,7 @@ import ReviewCard from "./ReviewCard";
 import Loader from "../layout/Loader/Loader";
 import { useAlert } from "react-alert";
 import Metadata from "../layout/Metadata";
+import { addItemsToCart } from "../../actions/cartAction";
 
 const ProductDetails = ({ match }) => {
   const { id } = useParams();
@@ -30,6 +31,10 @@ const ProductDetails = ({ match }) => {
     }
     const qty = quantity - 1;
     setQuantity(qty);
+  };
+  const addToCartHandler = () => {
+    dispatch(addItemsToCart(id, quantity));
+    alert.success("Item Added To Cart");
   };
 
   const { product, loading, error } = useSelector(
@@ -100,12 +105,12 @@ const ProductDetails = ({ match }) => {
                     <button onClick={decreaseQuantity}>-</button>
                     <input readOnly value={quantity} type="number" />
                     <button onClick={increaseQuantity}>+</button>
-                  </div>{" "}
-                  <button>Add to Cart</button>
+                  </div>
+                  <button onClick={addToCartHandler}>Add to Cart</button>
                 </div>
 
                 <p>
-                  Status:{" "}
+                  Status:
                   <b className={product.Stock < 1 ? "redColor" : "greenColor"}>
                     {product.Stock < 1 ? "OutOfStock" : "InStock"}
                   </b>
