@@ -20,7 +20,8 @@ import ProtectedRoute from "./component/Route/ProtectedRoute";
 import UpdateProfile from "./component/User/UpdateProfile";
 import UpdatePassword from "./component/User/UpdatePassword";
 import ForgotPassword from "./component/User/ForgotPassword";
-import ResetPassword from "./component/User/ResetPassword.jsx";
+import ResetPassword from "./component/User/ResetPassword";
+import Cart from "./component/Cart/Cart";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -31,7 +32,7 @@ function App() {
         families: ["Roboto", "Droid Sans", "Chilanka"],
       },
     });
-      store.dispatch(loadUser());
+    store.dispatch(loadUser());
   }, []);
 
   return (
@@ -47,6 +48,8 @@ function App() {
         <Route exact path="/search" element={<Search />} />
 
         <Route exact path="/login" element={<LoginSignUp />} />
+
+        <Route exact path="/cart" element={<Cart />} />
 
         <Route
           exact

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_TO_CART } from "../constants/cartConstants";
+import { ADD_TO_CART, REMOVE_CART_ITEM } from "../constants/cartConstants";
 
 //getState to access the states
 export const addItemsToCart = (id, quantity) => async (dispatch, getState) => {
@@ -12,12 +12,21 @@ export const addItemsToCart = (id, quantity) => async (dispatch, getState) => {
       name: data.product.name,
       price: data.product.price,
       image: data.product.images[0].url,
-      stock: data.product.Stock,
+      stock: data.product.stock,
       quantity,
     },
   });
 
   //Adding cart Items to local storage to prevent them vanishing when reloading app
   //cart here is store cart:cartReducers
+  localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
+};
+
+//Remove from cart
+export const removeItemsFromCart = (id) => async (dispatch, getState) => {
+  dispatch({
+    type: REMOVE_CART_ITEM,
+    payload: id,
+  });
   localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
 };
