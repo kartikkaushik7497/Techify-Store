@@ -22,6 +22,7 @@ import UpdatePassword from "./component/User/UpdatePassword";
 import ForgotPassword from "./component/User/ForgotPassword";
 import ResetPassword from "./component/User/ResetPassword";
 import Cart from "./component/Cart/Cart";
+import Shipping from "./component/Cart/Shipping";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -46,10 +47,6 @@ function App() {
         <Route path="/products/:keyword" element={<Products />} />
 
         <Route exact path="/search" element={<Search />} />
-
-        <Route exact path="/login" element={<LoginSignUp />} />
-
-        <Route exact path="/cart" element={<Cart />} />
 
         <Route
           exact
@@ -76,6 +73,17 @@ function App() {
           path="/password/reset/:token"
           element={<ResetPassword />}
         />
+
+        <Route exact path="/login" element={<LoginSignUp />} />
+
+        <Route exact path="/cart" element={<Cart />} />
+
+        <Route
+          exact
+          path="/shipping"
+          element={<Shipping />}
+        />
+
       </Routes>
       <Footer />
     </Router>
