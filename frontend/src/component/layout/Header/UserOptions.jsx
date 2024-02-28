@@ -22,7 +22,11 @@ const UserOptions = ({ user }) => {
     { icon: <ListAltIcon />, name: "Orders", func: orders },
     { icon: <PersonIcon />, name: "Profile", func: account },
     {
-      icon: <ShoppingCartIcon />,
+      icon: (
+        <ShoppingCartIcon
+          style={{ color: cartItems.length > 0 ? "tomato" : "unset" }}
+        />
+      ),
       name: `Cart(${cartItems.length})`,
       func: cart,
     },
