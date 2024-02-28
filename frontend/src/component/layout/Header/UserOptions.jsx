@@ -6,18 +6,26 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ListAltIcon from "@material-ui/icons/ListAlt";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 import { logout } from "../../../actions/userAction";
 
 const UserOptions = ({ user }) => {
+  const { cartItems } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const alert = useAlert();
   const navigate = useNavigate();
+
   const options = [
     { icon: <ListAltIcon />, name: "Orders", func: orders },
     { icon: <PersonIcon />, name: "Profile", func: account },
+    {
+      icon: <ShoppingCartIcon />,
+      name: `Cart(${cartItems.length})`,
+      func: cart,
+    },
     { icon: <ExitToAppIcon />, name: "Logout", func: logoutUser },
   ];
 
@@ -37,6 +45,9 @@ const UserOptions = ({ user }) => {
   }
   function account() {
     navigate("/account");
+  }
+  function cart() {
+    navigate("/cart");
   }
   function logoutUser() {
     dispatch(logout());
@@ -68,6 +79,7 @@ const UserOptions = ({ user }) => {
             key={item.name}
             icon={item.icon}
             tooltipTitle={item.name}
+            tooltipOpen={window.innerWidth <= 600 ? true : false}
             onClick={item.func}
           />
         ))}
