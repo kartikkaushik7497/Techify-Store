@@ -64,7 +64,7 @@ const Products = ({ match }) => {
         <Loader />
       ) : (
         <Fragment>
-          <Metadata title="ECOMMERCE" />
+          <Metadata title="STORE" />
           <h2 className="productsHeading">Products</h2>
           <div className="products">
             {products &&
