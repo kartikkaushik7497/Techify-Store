@@ -30,14 +30,14 @@ const MyOrders = () => {
       cellClassName: (params) => {
         return params.id === "Delivered" ? "greenColor" : "redColor";
       },
-      renderCell: (params) => {
-        const statusColor = params.value === "Delivered" ? "green" : "red";
-        return (
-          <div style={{ color: statusColor }}>
-            {params.value}
-          </div>
-        );
-      },
+      // renderCell: (params) => {
+      //   const statusColor = params.value === "Delivered" ? "green" : "red";
+      //   return (
+      //     <div style={{ color: statusColor }}>
+      //       {params.value}
+      //     </div>
+      //   );
+      // },
     },
     {
       field: "itemsQty",
