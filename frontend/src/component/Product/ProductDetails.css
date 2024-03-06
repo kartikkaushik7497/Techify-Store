@@ -139,15 +139,22 @@
   background-color: rgb(197, 68, 45);
   transform: scale(1.1);
 }
-
+.simple-dialog-title {
+  border: 1px black solid;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.dialog-title {
+  font: 900 0.7vmax "Roboto" !important;
+}
 .submitDialog {
   display: flex;
   flex-direction: column;
 }
 .submitDialogTextArea {
-  border: 1px solid rgba(0, 0, 0, 0.082);
+  border: 1px solid rgba(0, 0, 0, 0.514);
   margin: 1vmax 0;
-  outline: none;
   padding: 1rem;
   font: 300 1rem "Roboto";
 }
@@ -190,11 +197,29 @@
   color: rgba(0, 0, 0, 0.445);
   font: 300 0.8vmax cursive;
 }
+.reviewCardComment {
+  color: rgba(0, 0, 0, 0.445);
+  font: 300 0.8vmax cursive;
+}
 
 .noReviews {
   font: 400 1.3vmax "Roboto";
   text-align: center;
   color: tomato;
+}
+.dialogButton {
+  border: 2px !important;
+  border-radius: 5px !important;
+  cursor: pointer !important;
+  -webkit-border-radius: 5px !important;
+  -moz-border-radius: 5px !important;
+  -ms-border-radius: 5px !important;
+  -o-border-radius: 5px !important;
+}
+
+.dialogButton:hover {
+  background-color: rgb(227, 224, 223) !important;
+  transform: scale(1.1) !important;
 }
 
 @media screen and (max-width: 600px) {
