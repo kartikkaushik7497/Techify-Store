@@ -30,6 +30,8 @@ import { loadStripe } from "@stripe/stripe-js";
 import OrderSuccess from "./component/Cart/OrderSuccess";
 import MyOrders from "./component/Order/MyOrders";
 import OrderDetails from "./component/Order/OrderDetails";
+import Dashboard from "./component/Admin/Dashboard";
+import ProductList from "./component/Admin/ProductList";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -50,7 +52,9 @@ function App() {
     });
     store.dispatch(loadUser());
 
-    getStripeApiKey();
+    if (isAuthenticated) {
+      getStripeApiKey();
+    }
   }, []);
 
   return (
@@ -135,6 +139,18 @@ function App() {
           exact
           path="/order/:id"
           element={<ProtectedRoute component={OrderDetails} />}
+        />
+
+        <Route
+          exact
+          path="/admin/dashboard"
+          element={<ProtectedRoute isAdmin={true} component={Dashboard} />}
+        />
+
+        <Route
+          exact
+          path="/admin/products"
+          element={<ProtectedRoute isAdmin={true} component={ProductList} />}
         />
       </Routes>
       <Footer />

@@ -7,15 +7,19 @@ import { Typography } from "@material-ui/core";
 import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 import { Link, useNavigate } from "react-router-dom";
 import Metadata from "../layout/Metadata";
+import { useAlert } from "react-alert";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
   const navigate = useNavigate();
+  const alert = useAlert();
+
 
   const increaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
     if (stock <= quantity) {
+      alert.error("Item out of stock");
       return;
     }
     dispatch(addItemsToCart(id, newQty));

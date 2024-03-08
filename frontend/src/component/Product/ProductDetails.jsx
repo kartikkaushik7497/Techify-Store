@@ -48,13 +48,18 @@ const ProductDetails = () => {
     setQuantity(qty);
   };
   const addToCartHandler = () => {
+    if (product.stock < 1) {
+      alert.error("Item out of stock");
+      return;
+    }
     dispatch(addItemsToCart(id, quantity));
+
     alert.success("Item Added To Cart");
   };
-  const submitReviewToggle = (e) => {
+  const submitReviewToggle = () => {
     open ? setOpen(false) : setOpen(true);
   };
-  const reviewSubmitHandler = (e) => {
+  const reviewSubmitHandler = () => {
     const myForm = new FormData();
 
     myForm.set("rating", rating);
@@ -137,7 +142,9 @@ const ProductDetails = () => {
               </div>
               <div className="detailsBlock-2">
                 <Rating {...options} />
-                <span className="detailsBlock-2-span">({product.numOfReviews} Reviews)</span>
+                <span className="detailsBlock-2-span">
+                  ({product.numOfReviews} Reviews)
+                </span>
               </div>
               <div className="detailsBlock-3">
                 <h1>{`₹${product.price}`}</h1>
@@ -147,18 +154,13 @@ const ProductDetails = () => {
                     <input readOnly value={quantity} type="number" />
                     <button onClick={increaseQuantity}>+</button>
                   </div>
-                  <button
-                    disabled={product.Stock < 1 ? true : false}
-                    onClick={addToCartHandler}
-                  >
-                    Add to Cart
-                  </button>
+                  <button onClick={addToCartHandler}>Add to Cart</button>
                 </div>
 
                 <p>
                   Status:
-                  <b className={product.Stock < 1 ? "redColor" : "greenColor"}>
-                    {product.Stock < 1 ? "OutOfStock" : " InStock"}
+                  <b className={product.stock < 1 ? "redColor" : "greenColor"}>
+                    {product.stock < 1 ? "OutOfStock" : " InStock"}
                   </b>
                 </p>
               </div>
