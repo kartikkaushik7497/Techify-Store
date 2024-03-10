@@ -99,11 +99,6 @@ const MyOrders = () => {
             disableSelectionOnClick
             className="myOrdersTable"
             autoHeight
-            sx={{
-              "&.MuiDataGrid-root .MuiDataGrid-cell:focus-within": {
-                outline: "none !important",
-              },
-            }}
           />
 
           <Typography id="myOrdersHeading">{user.name}'s Orders</Typography>

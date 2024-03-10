@@ -3,16 +3,17 @@ import { DataGrid } from "@mui/x-data-grid";
 import "./ProductList.css";
 import { useSelector, useDispatch } from "react-redux";
 import { clearErrors, getAdminProduct } from "../../actions/productAction";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
 import { Button } from "@material-ui/core";
 import Metadata from "../layout/Metadata";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import Sidebar from "./Sidebar";
+import SideBar from "./Sidebar";
 
 const ProductList = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const alert = useAlert();
 
@@ -25,7 +26,7 @@ const ProductList = () => {
     }
 
     dispatch(getAdminProduct());
-  }, [dispatch, alert, error]);
+  }, [dispatch, alert, error, navigate]);
 
   const columns = [
     { field: "id", headerName: "Product ID", minWidth: 200, flex: 0.5 },
@@ -81,7 +82,7 @@ const ProductList = () => {
     products.forEach((item) => {
       rows.push({
         id: item._id,
-        stock: item.stock,
+        stock: item.Stock,
         price: item.price,
         name: item.name,
       });
@@ -92,19 +93,25 @@ const ProductList = () => {
       <Metadata title={`ALL PRODUCTS - Admin`} />
 
       <div className="dashboard">
-        <Sidebar />
+        <SideBar />
         <div className="productListContainer">
           <h1 id="productListHeading">ALL PRODUCTS</h1>
 
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={10}
-            pagination={true}
-            disableSelectionOnClick
-            className="productListTable"
-            autoHeight
-          />
+          <div
+            className="bg-white rounded-xl shadow-lg w-full"
+            style={{ height: 700 }}
+          >
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              pageSize={10}
+              disableSelectIconOnClick
+              sx={{
+                boxShadow: 0,
+                border: 0,
+              }}
+            />
+          </div>
         </div>
       </div>
     </Fragment>
