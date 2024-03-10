@@ -100,6 +100,7 @@ const ProductList = () => {
             rows={rows}
             columns={columns}
             pageSize={10}
+            pagination={true}
             disableSelectionOnClick
             className="productListTable"
             autoHeight
