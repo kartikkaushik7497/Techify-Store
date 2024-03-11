@@ -2,7 +2,11 @@ import React, { Fragment, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import "./ProductList.css";
 import { useSelector, useDispatch } from "react-redux";
-import { clearErrors, getAdminProduct } from "../../actions/productAction";
+import {
+  clearErrors,
+  getAdminProduct,
+  deleteProduct,
+} from "../../actions/productAction";
 import { Link, useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
 import { Button } from "@material-ui/core";
@@ -10,6 +14,7 @@ import Metadata from "../layout/Metadata";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import SideBar from "./Sidebar";
+import { DELETE_PRODUCT_RESET } from "../../constants/productConstants";
 
 const ProductList = () => {
   const dispatch = useDispatch();
@@ -19,14 +24,33 @@ const ProductList = () => {
 
   const { error, products } = useSelector((state) => state.products);
 
+  const { error: deleteError, isDeleted } = useSelector(
+    (state) => state.product
+  );
+
+  const deleteProductHandler = (id) => {
+    dispatch(deleteProduct(id));
+  };
+
   useEffect(() => {
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
 
+    if (deleteError) {
+      alert.error(deleteError);
+      dispatch(clearErrors());
+    }
+
+    if (isDeleted) {
+      alert.success("Product Deleted Successfully");
+      navigate("/admin/dashboard");
+      dispatch({ type: DELETE_PRODUCT_RESET });
+    }
+
     dispatch(getAdminProduct());
-  }, [dispatch, alert, error, navigate]);
+  }, [dispatch, alert, error, deleteError,isDeleted, navigate]);
 
   const columns = [
     { field: "id", headerName: "Product ID", minWidth: 200, flex: 0.5 },
@@ -64,11 +88,11 @@ const ProductList = () => {
         return (
           <Fragment>
             <Link to={`/admin/product/${params.id}`}>
-              <EditIcon />
+              <EditIcon classes={{ root: "custom-edit-icon" }} />
             </Link>
 
-            <Button>
-              <DeleteIcon />
+            <Button onClick={() => deleteProductHandler(params.id)}>
+              <DeleteIcon classes={{ root: "custom-edit-icon" }} />
             </Button>
           </Fragment>
         );
@@ -82,7 +106,7 @@ const ProductList = () => {
     products.forEach((item) => {
       rows.push({
         id: item._id,
-        stock: item.Stock,
+        stock: item.stock,
         price: item.price,
         name: item.name,
       });

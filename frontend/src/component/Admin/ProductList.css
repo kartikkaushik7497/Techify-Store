@@ -7,6 +7,16 @@
     flex-direction: column;
     height: 100vh;
   }
+  .custom-edit-icon{
+    color: rgba(0, 0, 0, 0.724) !important;
+  }
+  .custom-edit-icon:hover{
+    color: rgb(200, 15, 15) !important;
+    cursor: pointer;
+  }
+  .MuiDataGrid-cellContent{
+    font: 300 1vmax "Roboto";
+  }
   
   #productListHeading {
     font: 400 2rem "Roboto";

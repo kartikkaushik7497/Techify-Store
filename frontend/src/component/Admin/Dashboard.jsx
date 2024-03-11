@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import { Chart as ChartJS } from "chart.js/auto";
-import { Chart } from "react-chartjs-2";
+import { Doughnut, Line } from "react-chartjs-2";
 import Sidebar from "./Sidebar.jsx";
 import "./Dashboard.css";
 import { Typography } from "@material-ui/core";

@@ -33,6 +33,7 @@ import OrderDetails from "./component/Order/OrderDetails";
 import Dashboard from "./component/Admin/Dashboard";
 import ProductList from "./component/Admin/ProductList";
 import NewProduct from "./component/Admin/NewProduct";
+import UpdateProduct from "./component/Admin/UpdateProduct";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -80,7 +81,7 @@ function App() {
           exact
           path="/me/update"
           element={<ProtectedRoute component={UpdateProfile} />}
-        />
+        />-
 
         <Route
           exact
@@ -158,6 +159,12 @@ function App() {
           exact
           path="/admin/product"
           element={<ProtectedRoute isAdmin={true} component={NewProduct} />}
+        />
+
+        <Route
+          exact
+          path="/admin/product/:id"
+          element={<ProtectedRoute isAdmin={true} component={UpdateProduct} />}
         />
       </Routes>
       <Footer />
