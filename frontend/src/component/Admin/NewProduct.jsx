@@ -52,7 +52,7 @@ const NewProduct = () => {
     }
   }, [dispatch, alert, error, navigate, success]);
   
-  const createProductSubmitHandler = (e) => {
+  const createProductSubmitHandler = (e) => { 
     e.preventDefault();
     
     const myForm = new FormData();
@@ -67,6 +67,7 @@ const NewProduct = () => {
     images.forEach((image, index) => {
       myForm.append(`images[${index}]`, image); // Use array notation for multiple images
     });
+    console.log(images);
     dispatch(createProduct(myForm));
   };
 
