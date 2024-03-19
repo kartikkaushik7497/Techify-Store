@@ -1,8 +1,20 @@
+.green {
+  color: green !important;
+  font: 300 1vmax "Roboto" !important;
+}
+.red {
+  color: red !important;
+  font: 300 1vmax "Roboto" !important;
+}
+.orange {
+  color: orange !important;
+  font: 300 1vmax "Roboto" !important;
+}
 .greenColor {
-  color: green;
+  color: green !important;
 }
 .redColor {
-  color: red;
+  color: red !important;
 }
 .myOrdersPage {
   width: 100vw;

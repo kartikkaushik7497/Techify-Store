@@ -36,6 +36,8 @@ import NewProduct from "./component/Admin/NewProduct";
 import UpdateProduct from "./component/Admin/UpdateProduct";
 import OrderList from "./component/Admin/OrderList";
 import ProcessOrder from "./component/Admin/ProcessOrder";
+import UsersList from "./component/Admin/UsersList";
+import UpdateUser from "./component/Admin/UpdateUser";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -48,6 +50,10 @@ function App() {
     setStripeApiKey(data.stripeApiKey);
   }
 
+  if (isAuthenticated) {
+    getStripeApiKey();
+  }
+
   useEffect(() => {
     WebFont.load({
       google: {
@@ -55,10 +61,6 @@ function App() {
       },
     });
     store.dispatch(loadUser());
-
-    if (isAuthenticated) {
-      getStripeApiKey();
-    }
   }, []);
 
   return (
@@ -70,51 +72,41 @@ function App() {
         <Route exact path="/product/:id" element={<ProductDetails />} />
         <Route exact path="/products" element={<Products />} />
         <Route path="/products/:keyword" element={<Products />} />
-
         <Route exact path="/search" element={<Search />} />
-
         <Route
           exact
           path="/account"
           element={<ProtectedRoute component={Profile} />}
         />
-
         <Route
           exact
           path="/me/update"
           element={<ProtectedRoute component={UpdateProfile} />}
-        />-
-
+        />
+        -
         <Route
           exact
           path="/password/update"
           element={<ProtectedRoute component={UpdatePassword} />}
         />
-
         <Route exact path="/password/forgot" element={<ForgotPassword />} />
-
         <Route
           exact
           path="/password/reset/:token"
           element={<ResetPassword />}
         />
-
         <Route exact path="/login" element={<LoginSignUp />} />
-
         <Route exact path="/cart" element={<Cart />} />
-
         <Route
           exact
           path="/shipping"
           element={<ProtectedRoute component={Shipping} />}
         />
-
         <Route
           exact
           path="/order/confirm"
           element={<ProtectedRoute component={ConfirmOrder} />}
         />
-
         <Route
           exact
           path="/process/payment"
@@ -126,59 +118,60 @@ function App() {
             )
           }
         />
-
         <Route
           exact
           path="/success"
           element={<ProtectedRoute component={OrderSuccess} />}
         />
-
         <Route
           exact
           path="/orders"
           element={<ProtectedRoute component={MyOrders} />}
         />
-
         <Route
           exact
           path="/order/:id"
           element={<ProtectedRoute component={OrderDetails} />}
         />
-
         <Route
           exact
           path="/admin/dashboard"
           element={<ProtectedRoute isAdmin={true} component={Dashboard} />}
         />
-
         <Route
           exact
           path="/admin/products"
           element={<ProtectedRoute isAdmin={true} component={ProductList} />}
         />
-
         <Route
           exact
           path="/admin/product"
           element={<ProtectedRoute isAdmin={true} component={NewProduct} />}
         />
-
         <Route
           exact
           path="/admin/product/:id"
           element={<ProtectedRoute isAdmin={true} component={UpdateProduct} />}
         />
-
         <Route
           exact
           path="/admin/orders"
           element={<ProtectedRoute isAdmin={true} component={OrderList} />}
         />
-
         <Route
           exact
           path="/admin/order/:id"
           element={<ProtectedRoute isAdmin={true} component={ProcessOrder} />}
+        />
+        <Route
+          exact
+          path="/admin/users"
+          element={<ProtectedRoute isAdmin={true} component={UsersList} />}
+        />
+        <Route
+          exact
+          path="/admin/user/:id"
+          element={<ProtectedRoute isAdmin={true} component={UpdateUser} />}
         />
       </Routes>
       <Footer />

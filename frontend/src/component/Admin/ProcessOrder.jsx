@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Metadata from "../layout/Metadata";
 import { Link } from "react-router-dom";
 import { Typography } from "@material-ui/core";

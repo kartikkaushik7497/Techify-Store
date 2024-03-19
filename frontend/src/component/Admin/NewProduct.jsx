@@ -67,7 +67,6 @@ const NewProduct = () => {
     images.forEach((image, index) => {
       myForm.append(`images[${index}]`, image); // Use array notation for multiple images
     });
-    console.log(images);
     dispatch(createProduct(myForm));
   };
 

@@ -9,7 +9,11 @@ import Metadata from "../layout/Metadata";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import SideBar from "./Sidebar";
-import { deleteOrder, getAllOrders,clearErrors } from "../../actions/orderAction";
+import {
+  deleteOrder,
+  getAllOrders,
+  clearErrors,
+} from "../../actions/orderAction";
 import { DELETE_ORDER_RESET } from "../../constants/orderConstants";
 
 const OrderList = () => {
@@ -55,9 +59,21 @@ const OrderList = () => {
       minWidth: 150,
       flex: 0.5,
       //params.getValue() function replaced to params.id
-      cellClassName: (params) => {
-        return params.id === "Delivered" ? "greenColor" : "redColor";
-      },
+      renderCell: (params) => {
+        return (
+            <>
+                {
+                    params.row.status === "Delivered" ? (
+                        <span className="green">{params.row.status}</span>
+                    ) : params.row.status === "Shipped" ? (
+                        <span className="orange">{params.row.status}</span>
+                    ) : (
+                        <span className="red">{params.row.status}</span>
+                    )
+                }
+            </>
+        )
+    },
     },
     {
       field: "itemsQty",
