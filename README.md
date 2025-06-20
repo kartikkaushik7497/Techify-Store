@@ -1,4 +1,4 @@
-# MERN-Ecommerce-Project
+# TECHIFY-Ecommerce-Project
 This is a full-stack web application built using the MERN stack. The application allows users to view products,add them to cart and can order it later. Users can also review and comment on products in review section.
 
 # Technologies Used
