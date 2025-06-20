@@ -1,5 +1,5 @@
 # TECHIFY-Ecommerce-Project
-This is a full-stack web application built using the MERN stack. The application allows users to view products,add them to cart and can order it later. Users can also review and comment on products in review section.
+This is a full-stack web application built using the MERN stack. The application allows users to view products,add them to cart and can order it later. Users can also review and comment on products in review section.It includes an admin panel for managing products, orders, users, and inventory.Admins can also view sales and stock insights through real-time data visualizations.
 
 # Technologies Used
 - MongoDB: database used to store post data
